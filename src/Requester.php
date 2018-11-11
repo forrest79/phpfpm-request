@@ -18,7 +18,10 @@ class Requester
 	private $listener;
 
 	/** @var array */
-	private $options;
+	private $options = [];
+
+	/** @var string */
+	private static $detectedListener;
 
 
 	public function __construct(?string $listener = NULL)
@@ -78,13 +81,20 @@ class Requester
 
 	public static function autodetect(): self
 	{
-		foreach (self::LISTERNERS as $listener) {
-			if (self::isListening($listener) === TRUE) {
-				return self::create($listener);
+		if (self::$detectedListener === NULL) {
+			foreach (self::LISTERNERS as $listener) {
+				if (self::isListening($listener) === TRUE) {
+					self::$detectedListener = $listener;
+					break;
+				}
+			}
+
+			if (self::$detectedListener === NULL) {
+				throw new Exceptions\NoListenerDetectedException();
 			}
 		}
 
-		throw new Exceptions\NoListenerDetectedException();
+		return self::create(self::$detectedListener);
 	}
 
 
