@@ -1,0 +1,21 @@
+{
+	"name": "forrest79/phpfpm-request",
+	"description": "Run php-fpm requests from command line.",
+	"keywords": ["phpfpm", "request", "cli"],
+	"type": "library",
+	"license": "BSD-3-Clause",
+	"require": {
+		"php":  ">=7.1"
+	},
+	"autoload": {
+		"psr-4": {
+			"Forrest79\\PhpFpmRequest\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Jakub Trmota",
+			"email": "jakub@trmota.cz"
+		}
+	]
+}
