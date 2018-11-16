@@ -4,6 +4,7 @@ namespace Forrest79\PhpFpmRequest;
 
 class Requester
 {
+	public const PHP73_SOCK = '/var/run/php/php7.3-fpm.sock';
 	public const PHP72_SOCK = '/var/run/php/php7.2-fpm.sock';
 	public const PHP71_SOCK = '/var/run/php/php7.1-fpm.sock';
 	public const TCP_IP = '127.0.0.1:9000';
@@ -100,15 +101,14 @@ class Requester
 
 	private static function isListening(string $listener): bool
 	{
+		if ((string) (int) $listener === $listener) { // only port
+			$listener = '127.0.0.1:' . $listener;
+		}
+
 		if (strpos($listener, ':') === FALSE) { // socket
 			return file_exists($listener);
 		} else { // TCP/IP
-			if ((string) (int) $listener === $listener) { // only port
-				$ip = '127.0.0.1';
-				$port = $listener;
-			} else {
-				[$ip, $port] = explode(':', $listener);
-			}
+			[$ip, $port] = explode(':', $listener);
 
 			$fp = @fsockopen($ip, (int) $port, $errno, $errstr, 0.1);
 			if (!$fp) {
