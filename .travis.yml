@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+
+before_install:
+  - composer self-update
+
+install:
+  - composer install --no-interaction --prefer-source
+
+script:
+  - php tests/test-cli-fpm.php
+  - php tests/test-requests.php
+  - vendor/bin/phpstan analyse src tests
