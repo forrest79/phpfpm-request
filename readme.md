@@ -4,13 +4,23 @@
 
 Simply utility to make `php-fpm` requests right from command line with no needs to setup your web server for this requests.
 
-This needs `cgi-fcgi` installed on your system. On Debian (Ubuntu...) like linux you can do this:
+
+## Installation
+
+The recommended way to install Forrest79/PhpFpmRequest is through Composer:
+
+```sh
+composer require forrest79/phpfpm-request
+```
+
+This also needs `cgi-fcgi` installed on your system. On Debian (Ubuntu...) like linux you can do this:
 
 ```bash
 sudo apt-get install libfcgi0ldbl 
 ```
 
 You can you this to clear some caches from cli, that needs to be call via HTTP request (opcache, apcu, ...) or to warm up your cache after new version is deployed and before web server is started to point to new source code.
+
 
 ## How to use it
 
@@ -59,6 +69,7 @@ $requester
 ```
 
 If you need better API for this, extends `Requester` with your own class and create better public API and in every method just call `parent::setOption('...', '...')`.
+
 
 ### Cli and php-fpm in one file
 
