@@ -15,7 +15,7 @@ class Requester
 		self::TCP_IP,
 	];
 
-	/** @var string */
+	/** @var string|NULL */
 	private $listener;
 
 	/** @var array */
@@ -110,8 +110,8 @@ class Requester
 		} else { // TCP/IP
 			[$ip, $port] = explode(':', $listener);
 
-			$fp = @fsockopen($ip, (int) $port, $errno, $errstr, 0.1);
-			if (!$fp) {
+			$fp = @fsockopen($ip, (int) $port, $errno, $errstr, 0.1); // intentionally @
+			if ($fp === FALSE) {
 				return FALSE;
 			} else {
 				fclose($fp);

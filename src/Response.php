@@ -33,7 +33,7 @@ class Response
 	}
 
 
-	public function getBody(): string
+	public function getBody(): ?string
 	{
 		$this->processResponse();
 		return $this->body;
@@ -46,7 +46,10 @@ class Response
 			$delimiter = strpos($this->response, "\r\n") !== FALSE ? "\r\n" : "\n";
 
 			$data = explode($delimiter . $delimiter, $this->response);
-			$this->body = trim(array_pop($data));
+			if ($data === FALSE) {
+				throw new \RuntimeException();
+			}
+			$this->body = trim(array_pop($data) ?: '');
 			$this->headers = explode($delimiter, implode($delimiter, $data));
 		}
 	}
