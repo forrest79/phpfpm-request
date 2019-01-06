@@ -17,7 +17,7 @@ composer require forrest79/phpfpm-request
 This also needs `cgi-fcgi` installed on your system. On Debian (Ubuntu...) like linux you can do this:
 
 ```bash
-sudo apt-get install libfcgi0ldbl 
+sudo apt-get install libfcgi0ldbl
 ```
 
 You can you this to clear some caches from cli, that needs to be call via HTTP request (opcache, apcu, ...) or to warm up your cache after new version is deployed and before web server is started to point to new source code.
