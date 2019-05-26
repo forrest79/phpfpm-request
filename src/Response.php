@@ -4,17 +4,17 @@ namespace Forrest79\PhpFpmRequest;
 
 class Response
 {
-	/** @var string */
-	private $response = '';
+	/** @var string[] */
+	private $response;
 
 	/** @var string[] */
-	private $headers = [];
+	private $headers;
 
 	/** @var string|NULL */
 	private $body = NULL;
 
 
-	public function __construct(string $response)
+	public function __construct(array $response)
 	{
 		$this->response = $response;
 	}
@@ -22,7 +22,7 @@ class Response
 
 	public function getResponse(): string
 	{
-		return $this->response;
+		return implode(PHP_EOL, $this->response);
 	}
 
 
@@ -42,15 +42,22 @@ class Response
 
 	private function processResponse(): void
 	{
-		if ($this->body === NULL) {
-			$delimiter = strpos($this->response, "\r\n") !== FALSE ? "\r\n" : "\n";
-
-			$data = explode($delimiter . $delimiter, $this->response);
-			if ($data === FALSE) {
-				throw new \RuntimeException();
+		if ($this->headers === NULL) {
+			$headers = [];
+			$body = [];
+			$readHeaders = TRUE;
+			foreach ($this->response as $line) {
+				if ($readHeaders && ($line === '')) {
+					$readHeaders = FALSE;
+				} else if ($readHeaders) {
+					$headers[] = $line;
+				} else {
+					$body[] = $line;
+				}
 			}
-			$this->body = trim(array_pop($data) ?: '');
-			$this->headers = explode($delimiter, implode($delimiter, $data));
+
+			$this->headers = $headers;
+			$this->body = trim(implode(PHP_EOL, $body)) ?: NULL;
 		}
 	}
 

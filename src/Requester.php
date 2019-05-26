@@ -4,12 +4,15 @@ namespace Forrest79\PhpFpmRequest;
 
 class Requester
 {
+	public const PHP74_SOCK = '/var/run/php/php7.4-fpm.sock';
 	public const PHP73_SOCK = '/var/run/php/php7.3-fpm.sock';
 	public const PHP72_SOCK = '/var/run/php/php7.2-fpm.sock';
 	public const PHP71_SOCK = '/var/run/php/php7.1-fpm.sock';
 	public const TCP_IP = '127.0.0.1:9000';
 
-	private const LISTERNERS = [
+	private const LISTENERS = [
+		self::PHP74_SOCK,
+		self::PHP73_SOCK,
 		self::PHP72_SOCK,
 		self::PHP71_SOCK,
 		self::TCP_IP,
@@ -61,10 +64,10 @@ class Requester
 		$command = sprintf(implode(' \\' . PHP_EOL, $options), $this->listener);
 		exec($command, $output, $exitCode);
 
-		$returned = implode(PHP_EOL, $output);
 		if ($exitCode === 0) {
-			return new Response($returned);
+			return new Response($output);
 		} else {
+			$returned = implode(PHP_EOL, $output);
 			if (strpos($returned, 'cgi-fcgi: not found') !== FALSE) {
 				throw new Exceptions\CgiFcgiNotFoundException('\'cgi-fcgi\' utility not found in your system. In Debian/Ubuntu try install it with \'sudo apt-get install libfcgi0ldbl\'.');
 			} else {
@@ -83,7 +86,7 @@ class Requester
 	public static function autodetect(): self
 	{
 		if (self::$detectedListener === NULL) {
-			foreach (self::LISTERNERS as $listener) {
+			foreach (self::LISTENERS as $listener) {
 				if (self::isListening($listener) === TRUE) {
 					self::$detectedListener = $listener;
 					break;
