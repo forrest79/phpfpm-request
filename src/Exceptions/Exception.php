@@ -4,4 +4,5 @@ namespace Forrest79\PhpFpmRequest\Exceptions;
 
 abstract class Exception extends \RuntimeException
 {
+
 }

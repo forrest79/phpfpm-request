@@ -20,6 +20,7 @@ install:
   - composer install --no-interaction --prefer-source
 
 script:
+  - vendor/bin/phpcs -s src tests
+  - vendor/bin/phpstan analyse src tests
   - php tests/test-cli-fpm.php
   - php tests/test-requests.php
-  - vendor/bin/phpstan analyse src tests

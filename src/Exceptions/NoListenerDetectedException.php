@@ -4,4 +4,5 @@ namespace Forrest79\PhpFpmRequest\Exceptions;
 
 class NoListenerDetectedException extends Exception
 {
+
 }
