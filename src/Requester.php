@@ -79,7 +79,7 @@ class Requester
 
 	public static function create(string $listener): self
 	{
-		return new static($listener);
+		return new self($listener);
 	}
 
 
