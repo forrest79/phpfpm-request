@@ -1,6 +1,6 @@
 # PhpFpmRequest
 
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://github.com/forrest79/PhPgSql-Nette/blob/master/license.md)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://github.com/forrest79/PhpFpmRequest/blob/master/license.md)
 [![Build Status](https://travis-ci.org/forrest79/PhpFpmRequest.svg?branch=master)](https://travis-ci.org/forrest79/PhpFpmRequest)
 
 Simply utility to make `php-fpm` requests right from command line with no needs to setup your web server for this requests.
