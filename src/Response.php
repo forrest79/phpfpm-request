@@ -4,16 +4,19 @@ namespace Forrest79\PhpFpmRequest;
 
 class Response
 {
-	/** @var string[] */
+	/** @var array<string> */
 	private $response;
 
-	/** @var string[] */
+	/** @var array<string> */
 	private $headers;
 
 	/** @var string|NULL */
 	private $body = NULL;
 
 
+	/**
+	 * @param array<string> $response
+	 */
 	public function __construct(array $response)
 	{
 		$this->response = $response;
@@ -26,6 +29,9 @@ class Response
 	}
 
 
+	/**
+	 * @return array<string>
+	 */
 	public function getHeaders(): array
 	{
 		$this->processResponse();
@@ -56,8 +62,10 @@ class Response
 				}
 			}
 
+			$trimmedBody = trim(implode(PHP_EOL, $body));
+
 			$this->headers = $headers;
-			$this->body = trim(implode(PHP_EOL, $body)) ?: NULL;
+			$this->body = $trimmedBody === '' ? NULL : $trimmedBody;
 		}
 	}
 

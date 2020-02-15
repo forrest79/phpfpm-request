@@ -21,7 +21,7 @@ class Requester
 	/** @var string|NULL */
 	private $listener;
 
-	/** @var array */
+	/** @var array<string, mixed> */
 	private $options = [];
 
 	/** @var string */
