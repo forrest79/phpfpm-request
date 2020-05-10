@@ -35,7 +35,7 @@ $requester = Forrest79\PhpFpmRequest\Requester::autodetect();
 Or if you know where `php-fpm` is listening, you can use this value:
 
 ```php
-$requester = Forrest79\PhpFpmRequest\Requester::create('/var/run/php/php7.2-fpm.sock');
+$requester = Forrest79\PhpFpmRequest\Requester::create('/var/run/php/php7.4-fpm.sock');
 ```
 
 Now just simple set PHP file to process with `php-fpm`:

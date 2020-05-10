@@ -5,13 +5,12 @@ namespace Forrest79\PhpFpmRequest;
 class Response
 {
 	/** @var array<string> */
-	private $response;
+	private array $response;
 
 	/** @var array<string> */
-	private $headers;
+	private ?array $headers = NULL;
 
-	/** @var string|NULL */
-	private $body = NULL;
+	private ?string $body = NULL;
 
 
 	/**
@@ -35,6 +34,7 @@ class Response
 	public function getHeaders(): array
 	{
 		$this->processResponse();
+		assert(is_array($this->headers));
 		return $this->headers;
 	}
 

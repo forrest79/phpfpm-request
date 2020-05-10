@@ -5,27 +5,19 @@ namespace Forrest79\PhpFpmRequest;
 class Requester
 {
 	public const PHP74_SOCK = '/var/run/php/php7.4-fpm.sock';
-	public const PHP73_SOCK = '/var/run/php/php7.3-fpm.sock';
-	public const PHP72_SOCK = '/var/run/php/php7.2-fpm.sock';
-	public const PHP71_SOCK = '/var/run/php/php7.1-fpm.sock';
 	public const TCP_IP = '127.0.0.1:9000';
 
 	private const LISTENERS = [
 		self::PHP74_SOCK,
-		self::PHP73_SOCK,
-		self::PHP72_SOCK,
-		self::PHP71_SOCK,
 		self::TCP_IP,
 	];
 
-	/** @var string|NULL */
-	private $listener;
+	private ?string $listener;
 
 	/** @var array<string, mixed> */
-	private $options = [];
+	private array $options = [];
 
-	/** @var string */
-	private static $detectedListener;
+	private static ?string $detectedListener = NULL;
 
 
 	public function __construct(?string $listener = NULL)
