@@ -23,5 +23,10 @@
 		"psr-4": {
 			"Forrest79\\PhpFpmRequest\\": "src/"
 		}
+	},
+	"scripts": {
+		"tests": "php tests/test-requests.php && php tests/test-requests.php",
+		"phpcs": "vendor/bin/phpcs -s src tests",
+		"phpstan": "vendor/bin/phpstan analyse src tests"
 	}
 }
