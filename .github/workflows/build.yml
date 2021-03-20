@@ -1,0 +1,54 @@
+name: build
+
+on: [push, pull_request]
+
+jobs:
+  run:
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      matrix:
+        php-versions: ['7.4', '8.0']
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: none
+          tools: composer:v2
+        env:
+          update: true
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress --no-suggest
+
+      - name: Run phpcs
+        run: composer phpcs
+
+      - name: Run phpstan
+        run: composer phpstan
+
+      - name: Setup PHP-FPM for tests
+        run: |
+          sudo apt-get install libfcgi0ldbl
+          sudo apt-get purge php7.4-fpm php8.0-fpm
+          sudo apt-get install php${{ matrix.php-versions }}-fpm
+
+      - name: Run tests
+        run: sudo -u www-data composer tests
