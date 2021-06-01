@@ -44,11 +44,8 @@ jobs:
       - name: Run phpstan
         run: composer phpstan
 
-      - name: Setup PHP-FPM for tests
-        run: |
-          sudo apt-get install libfcgi0ldbl
-          sudo apt-get purge php7.4-fpm php8.0-fpm
-          sudo apt-get install php${{ matrix.php-versions }}-fpm
+      - name: Install libfcgi0ldbl
+        run: sudo apt-get install libfcgi0ldbl
 
       - name: Run tests
         run: sudo -u www-data composer tests
