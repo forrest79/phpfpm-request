@@ -4,6 +4,8 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Forrest79\PhpFpmRequest;
 
+echo 'Request 1: ';
+
 $response1 = PhpFpmRequest\Requester::autodetect()
 	->setPhpFile(__DIR__ . DIRECTORY_SEPARATOR . 'request-text.php')
 	->send();
@@ -17,7 +19,11 @@ if (count($response1->getHeaders()) !== 1) {
 	exit(1);
 }
 
-echo 'Response 1 is OK' . PHP_EOL;
+echo 'response is OK' . PHP_EOL;
+
+// ---
+
+echo 'Request 2: ';
 
 $response2 = PhpFpmRequest\Requester::autodetect()
 	->setPhpFile(__DIR__ . DIRECTORY_SEPARATOR . 'request-http.php')
@@ -32,4 +38,23 @@ if (count($response2->getHeaders()) !== 3) {
 	exit(1);
 }
 
-echo 'Response 2 is OK' . PHP_EOL;
+echo 'response is OK' . PHP_EOL;
+
+// ---
+
+echo 'Request 3: ';
+
+$exceptionWasThrown = FALSE;
+try {
+	PhpFpmRequest\Requester::autodetect()
+		->setPhpFile(__DIR__ . DIRECTORY_SEPARATOR . 'non-existing-request.php');
+} catch (PhpFpmRequest\Exceptions\PhpFileNotFoundException $e) {
+	$exceptionWasThrown = TRUE;
+}
+
+if (!$exceptionWasThrown) {
+	echo 'PhpFileNotFoundException was expected but not thrown.' . PHP_EOL;
+	exit(1);
+}
+
+echo 'exception was successfully thrown' . PHP_EOL;
