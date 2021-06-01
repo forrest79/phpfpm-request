@@ -25,7 +25,7 @@
 		}
 	},
 	"scripts": {
-		"tests": "php tests/test-requests.php && php tests/test-requests.php",
+		"tests": "php tests/test-cli-fpm.php && php tests/test-requests.php",
 		"phpcs": "vendor/bin/phpcs -s src tests",
 		"phpstan": "vendor/bin/phpstan analyse src tests"
 	}
