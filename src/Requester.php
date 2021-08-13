@@ -41,7 +41,7 @@ class Requester
 		if (($realpath === FALSE) || !is_file($realpath)) {
 			throw new Exceptions\PhpFileNotFoundException(sprintf('PHP file to request \'%s\' not found.', $path));
 		}
-		return $this->setOption('SCRIPT_FILENAME', $path);
+		return $this->setOption('SCRIPT_FILENAME', $realpath);
 	}
 
 
