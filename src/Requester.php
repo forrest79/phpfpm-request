@@ -16,7 +16,7 @@ class Requester
 
 	private ?string $listener;
 
-	/** @var array<string, mixed> */
+	/** @var array<string, string> */
 	private array $options = [];
 
 	private static ?string $detectedListener = NULL;
