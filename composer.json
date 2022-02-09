@@ -27,5 +27,10 @@
 		"tests": "php tests/test-cli-fpm.php && php tests/test-requests.php",
 		"phpcs": "vendor/bin/phpcs -s src tests",
 		"phpstan": "vendor/bin/phpstan analyse src tests"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": false
+		}
 	}
 }
