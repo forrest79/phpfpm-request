@@ -11,6 +11,10 @@
 		<exclude-pattern>tests/test-requests.php</exclude-pattern>
 	</rule>
 
+	<rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable">
+		<exclude-pattern>tests/request-with-query.php</exclude-pattern>
+	</rule>
+
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array" value="

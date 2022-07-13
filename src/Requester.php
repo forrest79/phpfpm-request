@@ -31,12 +31,6 @@ class Requester
 	}
 
 
-	public function setMethod(string $method): self
-	{
-		return $this->setOption('REQUEST_METHOD', $method);
-	}
-
-
 	public function setPhpFile(string $path): self
 	{
 		$realpath = realpath($path);
@@ -44,6 +38,21 @@ class Requester
 			throw new Exceptions\PhpFileNotFoundException(sprintf('PHP file to request \'%s\' not found.', $path));
 		}
 		return $this->setOption('SCRIPT_FILENAME', $realpath);
+	}
+
+
+	public function setMethod(string $method): self
+	{
+		return $this->setOption('REQUEST_METHOD', $method);
+	}
+
+
+	/**
+	 * @param array<string, mixed> $parameters
+	 */
+	public function setQuery(array $parameters): self
+	{
+		return $this->setOption('QUERY_STRING', http_build_query($parameters));
 	}
 
 
@@ -58,7 +67,7 @@ class Requester
 	{
 		$options = [];
 		foreach ($this->options as $name => $value) {
-			$options[] = sprintf('%s=%s', $name, $value);
+			$options[] = sprintf('%s=%s', $name, str_replace('%', '%%', $value)); // str_replace - escaping for sprintf
 		}
 		$options[] = 'cgi-fcgi -bind -connect "%s" 2>&1';
 		$command = sprintf(implode(' \\' . PHP_EOL, $options), $this->listener);

@@ -44,6 +44,24 @@ echo 'response is OK' . PHP_EOL;
 
 echo 'Request 3: ';
 
+$response3 = PhpFpmRequest\Requester::autodetect()
+	->setPhpFile(__DIR__ . DIRECTORY_SEPARATOR . 'request-with-query.php')
+	->setQuery([
+		'parameter' => __FILE__,
+	])
+	->send();
+
+if ($response3->getBody() !== __FILE__) {
+	echo sprintf('Bad response body: \'%s\', expected \'%s\'', $response2->getBody(), __FILE__) . PHP_EOL;
+	exit(1);
+}
+
+echo 'response is OK' . PHP_EOL;
+
+// ---
+
+echo 'Request 4: ';
+
 $exceptionWasThrown = FALSE;
 try {
 	PhpFpmRequest\Requester::autodetect()
