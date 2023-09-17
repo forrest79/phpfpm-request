@@ -6,11 +6,6 @@
 		<exclude-pattern>src/*</exclude-pattern>
 	</rule>
 
-	<!-- PHP 8.0 -->
-	<rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch.NonCapturingCatchRequired">
-		<exclude-pattern>tests/test-requests.php</exclude-pattern>
-	</rule>
-
 	<rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable">
 		<exclude-pattern>tests/request-with-query.php</exclude-pattern>
 	</rule>

@@ -66,7 +66,7 @@ $exceptionWasThrown = FALSE;
 try {
 	PhpFpmRequest\Requester::autodetect()
 		->setPhpFile(__DIR__ . DIRECTORY_SEPARATOR . 'non-existing-request.php');
-} catch (PhpFpmRequest\Exceptions\PhpFileNotFoundException $e) {
+} catch (PhpFpmRequest\Exceptions\PhpFileNotFoundException) {
 	$exceptionWasThrown = TRUE;
 }
 

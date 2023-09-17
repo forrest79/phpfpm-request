@@ -7,26 +7,24 @@ class Requester
 	public const PHP82_SOCK = '/var/run/php/php8.2-fpm.sock';
 	public const PHP81_SOCK = '/var/run/php/php8.1-fpm.sock';
 	public const PHP80_SOCK = '/var/run/php/php8.0-fpm.sock';
-	public const PHP74_SOCK = '/var/run/php/php7.4-fpm.sock';
 	public const TCP_IP = '127.0.0.1:9000';
 
 	private const LISTENERS = [
 		self::PHP82_SOCK,
 		self::PHP81_SOCK,
 		self::PHP80_SOCK,
-		self::PHP74_SOCK,
 		self::TCP_IP,
 	];
 
-	private ?string $listener;
+	private string|NULL $listener;
 
 	/** @var array<string, string> */
 	private array $options = [];
 
-	private static ?string $detectedListener = NULL;
+	private static string|NULL $detectedListener = NULL;
 
 
-	public function __construct(?string $listener = NULL)
+	public function __construct(string|NULL $listener = NULL)
 	{
 		$this->listener = $listener;
 		$this->setMethod('GET');
@@ -79,7 +77,7 @@ class Requester
 			return new Response($output);
 		} else {
 			$returned = implode(PHP_EOL, $output);
-			if (strpos($returned, 'cgi-fcgi: not found') !== FALSE) {
+			if (str_contains($returned, 'cgi-fcgi: not found')) {
 				throw new Exceptions\CgiFcgiNotFoundException('\'cgi-fcgi\' utility not found in your system. In Debian/Ubuntu try install it with \'sudo apt-get install libfcgi0ldbl\'.');
 			} else {
 				throw new Exceptions\CgiFcgiException($returned, $exitCode);
@@ -119,7 +117,7 @@ class Requester
 			$listener = '127.0.0.1:' . $listener;
 		}
 
-		if (strpos($listener, ':') === FALSE) { // socket
+		if (!str_contains($listener, ':')) { // socket
 			return file_exists($listener);
 		} else { // TCP/IP
 			[$ip, $port] = explode(':', $listener);

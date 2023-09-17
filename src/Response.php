@@ -4,17 +4,17 @@ namespace Forrest79\PhpFpmRequest;
 
 class Response
 {
-	/** @var array<string> */
+	/** @var list<string> */
 	private array $response;
 
-	/** @var array<string> */
-	private ?array $headers = NULL;
+	/** @var list<string> */
+	private array|NULL $headers = NULL;
 
-	private ?string $body = NULL;
+	private string|NULL $body = NULL;
 
 
 	/**
-	 * @param array<string> $response
+	 * @param list<string> $response
 	 */
 	public function __construct(array $response)
 	{
@@ -39,7 +39,7 @@ class Response
 	}
 
 
-	public function getBody(): ?string
+	public function getBody(): string|NULL
 	{
 		$this->processResponse();
 		return $this->body;

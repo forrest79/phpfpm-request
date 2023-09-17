@@ -5,7 +5,7 @@
 [![License](https://poser.pugx.org/forrest79/phpfpm-request/license)](//packagist.org/packages/forrest79/phpfpm-request)
 [![Build](https://github.com/forrest79/PhpFpmRequest/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/forrest79/PhpFpmRequest/actions/workflows/build.yml)
 
-Simply utility to make `php-fpm` requests right from command line with no needs to setup your web server for this requests.
+Simply utility to make `php-fpm` requests right from command line with no needs to set up your web server for these requests.
 
 
 ## Installation
@@ -16,19 +16,19 @@ The recommended way to install Forrest79/PhpFpmRequest is through Composer:
 composer require forrest79/phpfpm-request
 ```
 
-This also needs `cgi-fcgi` installed on your system. On Debian (Ubuntu...) like linux you can do this:
+This also needs `cgi-fcgi` installed on your system. On Debian (Ubuntu...) like linux, you can do this:
 
 ```bash
 sudo apt-get install libfcgi0ldbl
 ```
 
-You can you this to clear some caches from cli, that needs to be call via HTTP request (opcache, apcu, ...) or to warm up your cache after new version is deployed and before web server is started to point to new source code.
+You can you this to clear some caches from cli that need to be called via HTTP request (opcache, apcu, ...) or to warm up your cache after a new version is deployed and before web server is started to point to new source code.
 
 
 ## How to use it
 
 We just need to know, where is `php-fpm` listening. It's config directive `listen` and it could be `socket` or `TCP\IP`.
-In `nginx` it's directive `fastcgi_pass`. If you don't know that or you're planning to run this on different systems, you can try to autodetect this:
+In `nginx` it's directive `fastcgi_pass`. If you don't know that, or you're planning to run this on different systems, you can try to autodetect this:
 
 ```php
 $requester = Forrest79\PhpFpmRequest\Requester::autodetect();
