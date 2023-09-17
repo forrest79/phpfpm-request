@@ -15,6 +15,7 @@
 	},
 	"require-dev": {
 		"forrest79/phpcs": "^1.2",
+		"forrest79/phpcs-ignores": "^0.3",
 		"phpstan/phpstan": "^1.10",
 		"phpstan/phpstan-strict-rules": "^1.5"
 	},
@@ -25,7 +26,7 @@
 	},
 	"scripts": {
 		"tests": "php tests/test-cli-fpm.php && php tests/test-requests.php",
-		"phpcs": "vendor/bin/phpcs -s src tests",
+		"phpcs": "vendor/bin/phpcs --bootstrap=vendor/forrest79/phpcs-ignores/src/bootstrap.php -s src tests",
 		"phpstan": "vendor/bin/phpstan analyse src tests"
 	},
 	"config": {
