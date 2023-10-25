@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/forrest79/phpfpm-request/v)](//packagist.org/packages/forrest79/phpfpm-request)
 [![Monthly Downloads](https://poser.pugx.org/forrest79/phpfpm-request/d/monthly)](//packagist.org/packages/forrest79/phpfpm-request)
 [![License](https://poser.pugx.org/forrest79/phpfpm-request/license)](//packagist.org/packages/forrest79/phpfpm-request)
-[![Build](https://github.com/forrest79/PhpFpmRequest/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/forrest79/PhpFpmRequest/actions/workflows/build.yml)
+[![Build](https://github.com/forrest79/phpfpm-request/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/forrest79/phpfpm-request/actions/workflows/build.yml)
 
 Simply utility to make `php-fpm` requests right from command line with no needs to set up your web server for these requests.
 
