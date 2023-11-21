@@ -49,7 +49,7 @@ jobs:
         run: composer phpstan
 
       - name: Install libfcgi0ldbl
-        run: sudo apt-get install libfcgi0ldbl
+        run: sudo apt install libfcgi0ldbl
 
       - name: Run tests
         run: sudo -u www-data composer tests

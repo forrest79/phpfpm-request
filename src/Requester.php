@@ -78,7 +78,7 @@ class Requester
 		} else {
 			$returned = implode(PHP_EOL, $output);
 			if (str_contains($returned, 'cgi-fcgi: not found')) {
-				throw new Exceptions\CgiFcgiNotFoundException('\'cgi-fcgi\' utility not found in your system. In Debian/Ubuntu try install it with \'sudo apt-get install libfcgi0ldbl\'.');
+				throw new Exceptions\CgiFcgiNotFoundException('\'cgi-fcgi\' utility not found in your system. In Debian/Ubuntu try install it with \'sudo apt install libfcgi0ldbl\'.');
 			} else {
 				throw new Exceptions\CgiFcgiException($returned, $exitCode);
 			}
