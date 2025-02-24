@@ -14,7 +14,7 @@
 		"php": "^8.0"
 	},
 	"require-dev": {
-		"forrest79/phpcs": "^1.2",
+		"forrest79/phpcs": "^1.7",
 		"forrest79/phpcs-ignores": "^0.5",
 		"phpstan/phpstan": "^2.1",
 		"phpstan/phpstan-strict-rules": "^2.0"
