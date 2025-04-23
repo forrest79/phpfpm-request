@@ -8,7 +8,7 @@ on:
 
 jobs:
   run:
-    runs-on: 'ubuntu-20.04'
+    runs-on: 'ubuntu-latest'
 
     strategy:
       matrix:
@@ -18,6 +18,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      # just to be sure there is no other PHP-FPM installed
+      - name: Uninstall default PHP
+        run:  sudo apt purge php-common
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -50,6 +54,14 @@ jobs:
 
       - name: Install libfcgi0ldbl
         run: sudo apt install libfcgi0ldbl
+
+      # www-data has access to container files
+      - name: Update user group for www-data
+        run: sudo usermod -a -G docker www-data
+
+      # keep after updating a user group
+      - name: Restart php-fpm
+        run: sudo service php${{ matrix.php-versions }}-fpm restart
 
       - name: Run tests
         run: sudo -u www-data composer tests
