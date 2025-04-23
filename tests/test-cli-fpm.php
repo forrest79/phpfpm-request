@@ -13,7 +13,7 @@ if (PHP_SAPI === 'cli') {
 		->send()
 		->getBody();
 
-	echo $response . PHP_EOL;
+	echo ($response ?? '') . PHP_EOL;
 	if ($response !== $message) {
 		exit(1);
 	}

@@ -20,15 +20,15 @@ class Requester
 		self::TCP_IP,
 	];
 
-	private string|NULL $listener;
+	private string|null $listener;
 
 	/** @var array<string, string> */
 	private array $options = [];
 
-	private static string|NULL $detectedListener = NULL;
+	private static string|null $detectedListener = null;
 
 
-	public function __construct(string|NULL $listener = NULL)
+	public function __construct(string|null $listener = null)
 	{
 		$this->listener = $listener;
 		$this->setMethod('GET');
@@ -38,9 +38,10 @@ class Requester
 	public function setPhpFile(string $path): self
 	{
 		$realpath = realpath($path);
-		if (($realpath === FALSE) || !is_file($realpath)) {
+		if (($realpath === false) || !is_file($realpath)) {
 			throw new Exceptions\PhpFileNotFoundException(sprintf('PHP file to request \'%s\' not found.', $path));
 		}
+
 		return $this->setOption('SCRIPT_FILENAME', $realpath);
 	}
 
@@ -98,15 +99,15 @@ class Requester
 
 	public static function autodetect(): self
 	{
-		if (self::$detectedListener === NULL) {
+		if (self::$detectedListener === null) {
 			foreach (self::LISTENERS as $listener) {
-				if (self::isListening($listener) === TRUE) {
+				if (self::isListening($listener) === true) {
 					self::$detectedListener = $listener;
 					break;
 				}
 			}
 
-			if (self::$detectedListener === NULL) {
+			if (self::$detectedListener === null) {
 				throw new Exceptions\NoListenerDetectedException();
 			}
 		}
@@ -127,11 +128,11 @@ class Requester
 			[$ip, $port] = explode(':', $listener);
 
 			$fp = @fsockopen($ip, (int) $port, $errno, $errstr, 0.1); // intentionally @
-			if ($fp === FALSE) {
-				return FALSE;
+			if ($fp === false) {
+				return false;
 			} else {
 				fclose($fp);
-				return TRUE;
+				return true;
 			}
 		}
 	}

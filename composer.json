@@ -14,10 +14,11 @@
 		"php": "^8.0"
 	},
 	"require-dev": {
-		"forrest79/phpcs": "^1.2",
+		"forrest79/phpcs": "^2.0",
 		"forrest79/phpcs-ignores": "^0.5",
 		"phpstan/phpstan": "^2.1",
-		"phpstan/phpstan-strict-rules": "^2.0"
+		"phpstan/phpstan-strict-rules": "^2.0",
+		"shipmonk/phpstan-rules": "^4.1"
 	},
 	"autoload": {
 		"psr-4": {

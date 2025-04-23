@@ -7,10 +7,10 @@ class Response
 	/** @var list<string> */
 	private array $response;
 
-	/** @var list<string> */
-	private array|NULL $headers = NULL;
+	/** @var list<string>|null */
+	private array|null $headers = null;
 
-	private string|NULL $body = NULL;
+	private string|null $body = null;
 
 
 	/**
@@ -29,7 +29,7 @@ class Response
 
 
 	/**
-	 * @return array<string>
+	 * @return list<string>
 	 */
 	public function getHeaders(): array
 	{
@@ -39,7 +39,7 @@ class Response
 	}
 
 
-	public function getBody(): string|NULL
+	public function getBody(): string|null
 	{
 		$this->processResponse();
 		return $this->body;
@@ -48,13 +48,13 @@ class Response
 
 	private function processResponse(): void
 	{
-		if ($this->headers === NULL) {
+		if ($this->headers === null) {
 			$headers = [];
 			$body = [];
-			$readHeaders = TRUE;
+			$readHeaders = true;
 			foreach ($this->response as $line) {
 				if ($readHeaders && ($line === '')) {
-					$readHeaders = FALSE;
+					$readHeaders = false;
 				} else if ($readHeaders) {
 					$headers[] = $line;
 				} else {
@@ -65,7 +65,7 @@ class Response
 			$trimmedBody = trim(implode(PHP_EOL, $body));
 
 			$this->headers = $headers;
-			$this->body = $trimmedBody === '' ? NULL : $trimmedBody;
+			$this->body = $trimmedBody === '' ? null : $trimmedBody;
 		}
 	}
 

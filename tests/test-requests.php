@@ -62,12 +62,12 @@ echo 'response is OK' . PHP_EOL;
 
 echo 'Request 4: ';
 
-$exceptionWasThrown = FALSE;
+$exceptionWasThrown = false;
 try {
 	PhpFpmRequest\Requester::autodetect()
 		->setPhpFile(__DIR__ . DIRECTORY_SEPARATOR . 'non-existing-request.php');
 } catch (PhpFpmRequest\Exceptions\PhpFileNotFoundException) {
-	$exceptionWasThrown = TRUE;
+	$exceptionWasThrown = true;
 }
 
 if (!$exceptionWasThrown) {
