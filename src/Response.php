@@ -7,7 +7,7 @@ class Response
 	/** @var list<string> */
 	private array $response;
 
-	/** @var list<string> */
+	/** @var list<string>|NULL */
 	private array|NULL $headers = NULL;
 
 	private string|NULL $body = NULL;
@@ -29,7 +29,7 @@ class Response
 
 
 	/**
-	 * @return array<string>
+	 * @return list<string>
 	 */
 	public function getHeaders(): array
 	{
