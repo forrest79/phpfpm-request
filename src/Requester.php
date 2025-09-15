@@ -4,20 +4,14 @@ namespace Forrest79\PhpFpmRequest;
 
 class Requester
 {
-	public const PHP84_SOCK = '/var/run/php/php8.4-fpm.sock';
-	public const PHP83_SOCK = '/var/run/php/php8.3-fpm.sock';
-	public const PHP82_SOCK = '/var/run/php/php8.2-fpm.sock';
-	public const PHP81_SOCK = '/var/run/php/php8.1-fpm.sock';
-	public const PHP80_SOCK = '/var/run/php/php8.0-fpm.sock';
-	public const TCP_IP = '127.0.0.1:9000';
+	public const string TCP_IP = '127.0.0.1:9000';
+	public const string PHP84_SOCK = '/var/run/php/php8.4-fpm.sock';
+	public const string PHP83_SOCK = '/var/run/php/php8.3-fpm.sock';
 
-	private const LISTENERS = [
+	private const array LISTENERS = [
+		self::TCP_IP,
 		self::PHP84_SOCK,
 		self::PHP83_SOCK,
-		self::PHP82_SOCK,
-		self::PHP81_SOCK,
-		self::PHP80_SOCK,
-		self::TCP_IP,
 	];
 
 	private string|null $listener;

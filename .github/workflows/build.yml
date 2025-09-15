@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        php-versions: ['8.0', '8.1', '8.2', '8.3', '8.4']
+        php-versions: ['8.3', '8.4']
       fail-fast: false
 
     steps:
@@ -55,13 +55,11 @@ jobs:
       - name: Install libfcgi0ldbl
         run: sudo apt install libfcgi0ldbl
 
-      # www-data has access to container files
-      - name: Update user group for www-data
-        run: sudo usermod -a -G docker www-data
+      - name: Run phpfpm under user runner
+        run: sudo sed -i 's/www-data/runner/g' /etc/php/${{ matrix.php-versions }}/fpm/pool.d/www.conf
 
-      # keep after updating a user group
       - name: Restart php-fpm
         run: sudo service php${{ matrix.php-versions }}-fpm restart
 
       - name: Run tests
-        run: sudo -u www-data composer tests
+        run: composer tests
