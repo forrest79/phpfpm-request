@@ -11,7 +11,7 @@ $response1 = PhpFpmRequest\Requester::autodetect()
 	->send();
 
 if ($response1->getBody() !== 'OK-TEXT') {
-	echo sprintf('Bad response body: \'%s\', expected \'%s\'', $response1->getBody(), 'OK-TEXT') . PHP_EOL;
+	echo sprintf('Bad response body: \'%s\', expected \'%s\'', $response1->getBody() ?? '<unknown-body>', 'OK-TEXT') . PHP_EOL;
 	exit(1);
 }
 if (count($response1->getHeaders()) !== 1) {
@@ -30,7 +30,7 @@ $response2 = PhpFpmRequest\Requester::autodetect()
 	->send();
 
 if ($response2->getBody() !== 'OK-HTTP') {
-	echo sprintf('Bad response body: \'%s\', expected \'%s\'', $response2->getBody(), 'OK-HTTP') . PHP_EOL;
+	echo sprintf('Bad response body: \'%s\', expected \'%s\'', $response2->getBody() ?? '<unknown-body>', 'OK-HTTP') . PHP_EOL;
 	exit(1);
 }
 if (count($response2->getHeaders()) !== 3) {
